@@ -11,13 +11,10 @@ import javax.swing.event.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.Vector;
 
-/**
- *
- * @author BR252FAC
- */
+
 public class MyTableModel extends AbstractTableModel
         implements TableModelListener {
-private Object[] names = {"First Name", "Last Name", "Address", "State", "Zip", "Apt"};
+private Object[] names = {"First Name", "Last Name", "Product", "Quantity", "Street Address"};
 private static Vector data = new Vector(10);
 
 private static Object[][] data11 = {
@@ -30,14 +27,14 @@ private static Object[][] data11 = {
 
 public MyTableModel() {
         for (int i = 0; i<5; i++) {
-            Address add = new Address();
-            add.fname = (String) data11[i][0];
-            add.lname = (String) data11[i][1];
-            add.address = (String) data11[i][2];
-            add.state = (String) data11[i][3];
-            add.zip  = (String) data11[i][4];
-            add.apt = ((Boolean)data11[i][5]).booleanValue();
-            data.add(add);
+//            Address add = new Address();
+//            add.fname = (String) data11[i][0];
+//            add.lname = (String) data11[i][1];
+//            add.address = (String) data11[i][2];
+//            add.state = (String) data11[i][3];
+//            add.zip  = (String) data11[i][4];
+//            add.apt = ((Boolean)data11[i][5]).booleanValue();
+//            data.add(add);
         }
 }
 
@@ -47,6 +44,7 @@ public Address getValueAtRow(int r) {
     }
     return null;
 }
+
 @Override
 public String getColumnName(int i) {
     return (String) names[i];
@@ -54,7 +52,7 @@ public String getColumnName(int i) {
 
 public Object getValueAt(int r, int c) {
         Address add = (Address) data.get(r);
-        return add.getValue(c);
+        return add;
 }
 
 @Override
@@ -68,7 +66,7 @@ public Class getColumnClass(int c) {
 public void setValueAt(Object value, int r, int c) {
         System.out.println(" Value Changed for Row = " + r + " Col = " + c + " :: " + (String) value);
         Address add = (Address) data.get(r);
-        add.setValue(c, value);
+//        add.setValue(c, value);
 }
 
 public int getColumnCount() { return names.length;}
@@ -77,7 +75,7 @@ public int getRowCount() {return data.size();}
 
 @Override
 public boolean isCellEditable(int r, int c) {
-    if (c == 3) return true;
+
     return false;
 }
 public void tableChanged(TableModelEvent tme) {
@@ -120,12 +118,12 @@ public void editData(ActionEvent ae) {
         System.out.println("Row = " + number);
         
         Address add = (Address) data.get((int)number);
-        add.setValue(0, "John");
-        add.setValue(1, "Smith");
-        add.setValue(2, "1223 Oak Street");
-        add.setValue(3, "VA");
-        add.setValue(4, "90876");
-        add.setValue(5, true);
+//        add.setValue(0, "John");
+//        add.setValue(1, "Smith");
+//        add.setValue(2, "1223 Oak Street");
+//        add.setValue(3, "VA");
+//        add.setValue(4, "90876");
+//        add.setValue(5, true);
 
         super.fireTableRowsUpdated((int)number, (int)number);
         
@@ -133,14 +131,14 @@ public void editData(ActionEvent ae) {
 
 public void addData(ActionEvent ae) {
         
-        Address add1 = new Address();
-        add1.setValue(0, "Walter");
-        add1.setValue(1, "Smith");
-        add1.setValue(2, "122 Elm Street");
-        add1.setValue(3, "VA");
-        add1.setValue(4, "90876");
-        add1.setValue(5, true);
-        data.add(add1);
+//        Address add1 = new Address();
+//        add1.setValue(0, "Walter");
+//        add1.setValue(1, "Smith");
+//        add1.setValue(2, "122 Elm Street");
+//        add1.setValue(3, "VA");
+//        add1.setValue(4, "90876");
+//        add1.setValue(5, true);
+//        data.add(add1);
 
         super.fireTableRowsInserted(data.size()-1, data.size()-1);
   }
