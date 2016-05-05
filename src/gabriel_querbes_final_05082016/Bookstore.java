@@ -5,8 +5,14 @@
  */
 package gabriel_querbes_final_05082016;
 
+import gabriel_querbes_final_05082016.it.gmu.edu.model.Address;
+import gabriel_querbes_final_05082016.it.gmu.edu.model.Customer;
+import gabriel_querbes_final_05082016.it.gmu.edu.model.MyBooksComboBoxModel;
 import gabriel_querbes_final_05082016.it.gmu.edu.model.MyComboBoxModel;
 import gabriel_querbes_final_05082016.it.gmu.edu.model.MyTableModel;
+import gabriel_querbes_final_05082016.it.gmu.edu.model.Order;
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -14,7 +20,7 @@ import gabriel_querbes_final_05082016.it.gmu.edu.model.MyTableModel;
  * @author gabrielquerbes
  */
 public class Bookstore extends javax.swing.JFrame {
-
+    LinkedList<Customer> myCustomers = new LinkedList <Customer>();
     
     /**
      * Creates new form Bookstore
@@ -59,21 +65,19 @@ public class Bookstore extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         rdbtnCredit = new javax.swing.JRadioButton();
         rdbtnDebit = new javax.swing.JRadioButton();
-        txtProduct = new javax.swing.JComboBox<>();
+        cmbxProduct = new javax.swing.JComboBox<>();
         spnrQuantity = new javax.swing.JSpinner();
         txtTotal = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        txtAccountNumber = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         shippingPanel1 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        txtBillFirstName = new javax.swing.JTextField();
-        txtBillLastName = new javax.swing.JTextField();
         txtBillStreet = new javax.swing.JTextField();
         txtBillCity = new javax.swing.JTextField();
         txtBillZip = new javax.swing.JTextField();
@@ -106,16 +110,6 @@ public class Bookstore extends javax.swing.JFrame {
         jLabel8.setText("State");
 
         jLabel9.setText("Zip");
-
-        txtShipFirstName.setText("jTextField1");
-
-        txtShipLastName.setText("jTextField1");
-
-        txtShipStreet.setText("jTextField1");
-
-        txtShipCity.setText("jTextField1");
-
-        txtShipZip.setText("jTextField1");
 
         cmbxShipState.setModel(new MyComboBoxModel());
 
@@ -203,6 +197,7 @@ public class Bookstore extends javax.swing.JFrame {
         jLabel13.setText("Total Cost");
 
         buttonGroup1.add(rdbtnCredit);
+        rdbtnCredit.setSelected(true);
         rdbtnCredit.setText("Credit");
         rdbtnCredit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -213,14 +208,28 @@ public class Bookstore extends javax.swing.JFrame {
         buttonGroup1.add(rdbtnDebit);
         rdbtnDebit.setText("Debit");
 
-        txtProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbxProduct.setModel(new MyBooksComboBoxModel());
 
-        txtTotal.setText("jTextField5");
+        txtTotal.setEditable(false);
+
+        jLabel14.setText("Account Number");
+
+        txtAccountNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAccountNumberActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout orderPanelLayout = new javax.swing.GroupLayout(orderPanel);
         orderPanel.setLayout(orderPanelLayout);
         orderPanelLayout.setHorizontalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(orderPanelLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(rdbtnCredit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(rdbtnDebit)
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(orderPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,25 +237,23 @@ public class Bookstore extends javax.swing.JFrame {
                     .addGroup(orderPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
-                        .addComponent(txtProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cmbxProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(orderPanelLayout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(spnrQuantity, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(orderPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(orderPanelLayout.createSequentialGroup()
                         .addComponent(jLabel12)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(orderPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel13)
+                        .addComponent(jLabel14)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(orderPanelLayout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(rdbtnCredit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rdbtnDebit)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         orderPanelLayout.setVerticalGroup(
             orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,7 +263,7 @@ public class Bookstore extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbxProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -269,22 +276,27 @@ public class Bookstore extends javax.swing.JFrame {
                     .addComponent(rdbtnDebit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(txtAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60))
+                .addGap(16, 16, 16))
         );
 
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Billing Address");
-
-        jLabel17.setText("First Name");
-
-        jLabel18.setText("Last Name");
 
         jLabel19.setText("Street Address");
 
@@ -293,16 +305,6 @@ public class Bookstore extends javax.swing.JFrame {
         jLabel21.setText("State");
 
         jLabel22.setText("Zip");
-
-        txtBillFirstName.setText("jTextField1");
-
-        txtBillLastName.setText("jTextField1");
-
-        txtBillStreet.setText("jTextField1");
-
-        txtBillCity.setText("jTextField1");
-
-        txtBillZip.setText("jTextField1");
 
         cmbxBillState.setModel(new MyComboBoxModel());
 
@@ -326,10 +328,6 @@ public class Bookstore extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtBillStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(shippingPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtBillLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(shippingPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtBillZip, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -344,11 +342,9 @@ public class Bookstore extends javax.swing.JFrame {
                                 .addComponent(cmbxBillState, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(txtBillCity, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, shippingPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel17)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chkbxSameAsShip)
-                            .addComponent(txtBillFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(chkbxSameAsShip)
+                        .addGap(68, 68, 68)))
                 .addContainerGap())
         );
         shippingPanel1Layout.setVerticalGroup(
@@ -358,15 +354,7 @@ public class Bookstore extends javax.swing.JFrame {
                 .addComponent(jLabel10)
                 .addGap(18, 18, 18)
                 .addComponent(chkbxSameAsShip)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
-                .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel17)
-                    .addComponent(txtBillFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBillLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
                 .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
                     .addComponent(txtBillStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -381,7 +369,8 @@ public class Bookstore extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(txtBillZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(txtBillZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -406,14 +395,11 @@ public class Bookstore extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(shippingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(orderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(shippingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(orderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(shippingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGap(18, 49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
                     .addComponent(btnCancel))
@@ -447,8 +433,6 @@ public class Bookstore extends javax.swing.JFrame {
     private void chkbxSameAsShipActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkbxSameAsShipActionPerformed
         // TODO add your handling code here:
         if (chkbxSameAsShip.isSelected()){
-            txtBillFirstName.setText(txtShipFirstName.getText());
-            txtBillLastName.setText(txtShipLastName.getText());
             txtBillStreet.setText(txtShipStreet.getText());
             txtBillCity.setText(txtShipCity.getText());
             cmbxBillState.setSelectedItem(cmbxShipState.getSelectedItem());
@@ -460,6 +444,109 @@ public class Bookstore extends javax.swing.JFrame {
         
       
     }//GEN-LAST:event_chkbxSameAsShipActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+       
+        boolean valid = true;
+        String errorMessage = "";
+        Customer aCustomer = new Customer();
+        Order aOrder = new Order();
+        Address shippingAddress = new Address();
+        Address billingAddress = new Address();
+        
+        //validate fields
+        
+        //Customer
+        if(!aCustomer.setFirstName(txtShipFirstName.getText())){
+            errorMessage += "Invalid First Name";
+            valid = false;
+        }
+        if(!aCustomer.setLastName(txtShipLastName.getText())){
+            errorMessage += "\nInvalid Last Name";
+            valid = false;
+        }
+        
+         
+        
+        //Shipping
+        if(!shippingAddress.setStreetAddress(txtShipStreet.getText())){
+            errorMessage += "\nInvalid Shipping Steet Address";
+            valid = false;
+        }
+        if(!shippingAddress.setCity(txtShipCity.getText())){
+            errorMessage += "\nInvalid Shipping City";
+            valid = false;
+        }
+        if(!shippingAddress.setState((String) cmbxShipState.getSelectedItem())){
+            errorMessage += "\nInvalid Shipping Sate";
+            valid = false;
+        }
+        if(!shippingAddress.setZipCode(txtShipZip.getText())){
+            errorMessage += "\nInvalid Shipping Zip Code, Must be 5 digits";
+            valid = false;
+        }
+        //billing
+        if(!billingAddress.setStreetAddress(txtBillStreet.getText())){
+            errorMessage += "\nInvalid Billing Steet Address";
+            valid = false;
+        }
+        if(!billingAddress.setCity(txtBillCity.getText())){
+            errorMessage += "\nInvalid Billing City";
+            valid = false;
+        }
+        if(!billingAddress.setState((String) cmbxBillState.getSelectedItem())){
+            errorMessage += "\nInvalid Billing State";
+            valid = false;
+        }
+        if(!billingAddress.setZipCode(txtBillZip.getText())){
+            errorMessage += "\nInvalid Billing Zip Code, Must be 5 digits";
+            valid = false;
+        }
+        
+        
+        //order
+        if((String)cmbxProduct.getSelectedItem() == ""){
+            errorMessage += "\nInvalid Product Selected";
+            valid = false;
+        }else{aOrder.setProduct((String) cmbxProduct.getSelectedItem());}
+        
+        
+        
+        if((int)spnrQuantity.getValue() == 0){
+            errorMessage += "\nQuantity Cannot be 0";
+            valid = false;
+        }else{aOrder.setQuantity((int)spnrQuantity.getValue());}
+        
+        if(!aOrder.setAccountNumber(txtAccountNumber.getText())){
+            errorMessage += "\nAccount Number MUST be 7 digits";
+            valid = false;
+        }
+        
+        
+        
+        if(!valid){
+            JOptionPane.showMessageDialog(null, "CORRECT ERROR(s):\n" + errorMessage);
+            System.out.println("fail");
+           
+        }
+        else{
+            //add data
+            aCustomer.setBillingAddresss(billingAddress);
+            aCustomer.setShippingAddress(shippingAddress);
+            aCustomer.setOrders(aOrder);
+            myCustomers.add(aCustomer);
+            JOptionPane.showMessageDialog(null, "Order Created");
+            System.out.println("success");
+        }
+
+        
+        
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtAccountNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccountNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAccountNumberActionPerformed
 
     /**
      * @param args the command line arguments
@@ -506,8 +593,6 @@ public class Bookstore extends javax.swing.JFrame {
     }
     
     public void clearBilling(){
-        txtBillFirstName.setText("");
-        txtBillLastName.setText("");
         txtBillStreet.setText("");
         txtBillCity.setText("");
         txtBillZip.setText("");
@@ -529,14 +614,14 @@ public class Bookstore extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox chkbxSameAsShip;
     private javax.swing.JComboBox<String> cmbxBillState;
+    private javax.swing.JComboBox<String> cmbxProduct;
     private javax.swing.JComboBox<String> cmbxShipState;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
@@ -559,12 +644,10 @@ public class Bookstore extends javax.swing.JFrame {
     private javax.swing.JPanel shippingPanel;
     private javax.swing.JPanel shippingPanel1;
     private javax.swing.JSpinner spnrQuantity;
+    private javax.swing.JTextField txtAccountNumber;
     private javax.swing.JTextField txtBillCity;
-    private javax.swing.JTextField txtBillFirstName;
-    private javax.swing.JTextField txtBillLastName;
     private javax.swing.JTextField txtBillStreet;
     private javax.swing.JTextField txtBillZip;
-    private javax.swing.JComboBox<String> txtProduct;
     private javax.swing.JTextField txtShipCity;
     private javax.swing.JTextField txtShipFirstName;
     private javax.swing.JTextField txtShipLastName;

@@ -25,6 +25,8 @@ private static Object[][] data11 = {
         {"Joe", "Doe", "4565 XYZ Street", "VA", "26111", true}
     };
 
+
+
 public MyTableModel() {
         for (int i = 0; i<5; i++) {
 //            Address add = new Address();
