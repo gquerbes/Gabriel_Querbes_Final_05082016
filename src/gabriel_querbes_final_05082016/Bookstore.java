@@ -20,7 +20,8 @@ import javax.swing.JOptionPane;
  * @author gabrielquerbes
  */
 public class Bookstore extends javax.swing.JFrame {
-    LinkedList<Customer> myCustomers = new LinkedList <Customer>();
+    //data structure
+    LinkedList<Customer> myCustomers = new LinkedList <>();
     
     /**
      * Creates new form Bookstore
@@ -110,6 +111,16 @@ public class Bookstore extends javax.swing.JFrame {
         jLabel8.setText("State");
 
         jLabel9.setText("Zip");
+
+        txtShipFirstName.setText("gadsfaf");
+
+        txtShipLastName.setText("sdfsd");
+
+        txtShipStreet.setText("sdfsadfs");
+
+        txtShipCity.setText("sdfasdf");
+
+        txtShipZip.setText("11111");
 
         cmbxShipState.setModel(new MyComboBoxModel());
 
@@ -214,6 +225,7 @@ public class Bookstore extends javax.swing.JFrame {
 
         jLabel14.setText("Account Number");
 
+        txtAccountNumber.setText("1111111");
         txtAccountNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAccountNumberActionPerformed(evt);
@@ -445,6 +457,9 @@ public class Bookstore extends javax.swing.JFrame {
       
     }//GEN-LAST:event_chkbxSameAsShipActionPerformed
 
+    
+
+    
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
        
@@ -535,7 +550,9 @@ public class Bookstore extends javax.swing.JFrame {
             aCustomer.setBillingAddresss(billingAddress);
             aCustomer.setShippingAddress(shippingAddress);
             aCustomer.setOrders(aOrder);
-            myCustomers.add(aCustomer);
+           //myCustomers.add(aCustomer);
+            addCustomerTolist(aCustomer);
+           
             JOptionPane.showMessageDialog(null, "Order Created");
             System.out.println("success");
         }
@@ -544,6 +561,13 @@ public class Bookstore extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    public void addCustomerTolist(Customer aCustomer){
+         
+        MyTableModel model = (MyTableModel) jTable1.getModel();
+        model.addData(aCustomer);
+      
+    }
+    
     private void txtAccountNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccountNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAccountNumberActionPerformed
@@ -581,6 +605,7 @@ public class Bookstore extends javax.swing.JFrame {
                 new Bookstore().setVisible(true);
             }
         });
+        
     }
 
     public void clearShipping(){

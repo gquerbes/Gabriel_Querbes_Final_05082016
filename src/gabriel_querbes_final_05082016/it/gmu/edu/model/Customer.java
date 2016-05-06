@@ -14,7 +14,7 @@ public class Customer {
     private String lastName;
     private Address shippingAddress;
     private Address billingAddresss;
-    private Order[] orders;
+    private Order[] orders = new Order[5];
     
     
       public String getFirstName() {
@@ -57,16 +57,15 @@ public class Customer {
         this.billingAddresss = billingAddresss;
     }
 
-    public Order[] getOrders() {
-        return orders;
+    public Order getOrders() {
+        Order aOrder= orders[0];
+        return aOrder;
     }
 
     public void setOrders(Order order) {
-        
-        for(int i = 0; i<5;i++){
-            orders[i] = order;
-        }
-    
+
+            orders[0] = order;
+
     
     }
 
