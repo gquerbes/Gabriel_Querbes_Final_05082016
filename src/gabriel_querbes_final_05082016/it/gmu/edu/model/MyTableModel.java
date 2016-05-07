@@ -163,24 +163,10 @@ public void editData(Customer current,int currentRow) {
     allData[x][2] = current.getBillingAddresss().getStreetAddress();
     allData[x][3] = current.getOrders().getProduct();
     allData[x][4] = Integer.toString(current.getOrders().getQuantity());
-    
-    super.fireTableRowsUpdated(x-1, x-1);
+    System.out.print("Current row: "+currentRow);
+    super.fireTableRowsUpdated(x, x);
     
                   
-//        long number = Math.round(Math.random()*10);
-//        
-//        if (number >= myCustomersList.size()) {number = myCustomersList.size() - 1;}
-//        System.out.println("Row = " + number);
-//        
-//        Customer add = (Address) data.get((int)number);
-////        add.setValue(0, "John");
-////        add.setValue(1, "Smith");
-////        add.setValue(2, "1223 Oak Street");
-////        add.setValue(3, "VA");
-////        add.setValue(4, "90876");
-////        add.setValue(5, true);
-//
-//        super.fireTableRowsUpdated((int)number, (int)number);
         
   }
 

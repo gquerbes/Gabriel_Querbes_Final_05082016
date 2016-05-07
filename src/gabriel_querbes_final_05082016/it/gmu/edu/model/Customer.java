@@ -14,7 +14,7 @@ public class Customer {
     private String lastName;
     private Address shippingAddress;
     private Address billingAddresss;
-    private Order[] orders = new Order[5];
+    private Order[] orders =  new Order [3];
     
     
       public String getFirstName() {
@@ -68,6 +68,12 @@ public class Customer {
 
     
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" + "firstName=" + firstName + ", lastName=" + lastName + ", shippingAddress=" + shippingAddress + ", billingAddresss=" + billingAddresss + ", orders=" + orders[0] + '}';
+    }
+
 
 
 }

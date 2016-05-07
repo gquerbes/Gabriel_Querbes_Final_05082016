@@ -13,8 +13,12 @@ import gabriel_querbes_final_05082016.it.gmu.edu.model.MyTableModel;
 import gabriel_querbes_final_05082016.it.gmu.edu.model.Order;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Iterator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
@@ -127,17 +131,18 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
 
         jLabel9.setText("Zip");
 
-        txtShipFirstName.setText("gadsfaf");
+        txtShipFirstName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtShipLastName.setText("sdfsd");
+        txtShipLastName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtShipStreet.setText("sdfsadfs");
+        txtShipStreet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtShipCity.setText("sdfasdf");
+        txtShipCity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        txtShipZip.setText("11111");
+        txtShipZip.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         cmbxShipState.setModel(new MyComboBoxModel());
+        cmbxShipState.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout shippingPanelLayout = new javax.swing.GroupLayout(shippingPanel);
         shippingPanel.setLayout(shippingPanelLayout);
@@ -182,10 +187,10 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addGroup(shippingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(shippingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(txtShipFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtShipFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(shippingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtShipLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -199,16 +204,18 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                     .addComponent(txtShipCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(shippingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbxShipState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cmbxShipState)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(shippingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtShipZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         shippingPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel4, jLabel5, jLabel6, jLabel7, jLabel8, jLabel9});
+
+        shippingPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtShipCity, txtShipFirstName, txtShipLastName, txtShipStreet, txtShipZip});
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -225,6 +232,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         buttonGroup1.add(rdbtnCredit);
         rdbtnCredit.setSelected(true);
         rdbtnCredit.setText("Credit");
+        rdbtnCredit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         rdbtnCredit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rdbtnCreditActionPerformed(evt);
@@ -233,14 +241,24 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
 
         buttonGroup1.add(rdbtnDebit);
         rdbtnDebit.setText("Debit");
+        rdbtnDebit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         cmbxProduct.setModel(new MyBooksComboBoxModel());
+        cmbxProduct.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        spnrQuantity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        spnrQuantity.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                spnrQuantityStateChanged(evt);
+            }
+        });
 
         txtTotal.setEditable(false);
+        txtTotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel14.setText("Account Number");
 
-        txtAccountNumber.setText("1111111");
+        txtAccountNumber.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txtAccountNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAccountNumberActionPerformed(evt);
@@ -274,10 +292,9 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(orderPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(orderPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
+                        .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel14))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -302,17 +319,20 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                     .addComponent(rdbtnCredit)
                     .addComponent(rdbtnDebit))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel14)
-                    .addComponent(txtAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtAccountNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(orderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16))
         );
 
+        orderPanelLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtAccountNumber, txtTotal});
+
         btnSubmit.setText("Submit");
+        btnSubmit.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSubmitActionPerformed(evt);
@@ -320,6 +340,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -338,9 +359,17 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
 
         jLabel22.setText("Zip");
 
+        txtBillStreet.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtBillCity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        txtBillZip.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         cmbxBillState.setModel(new MyComboBoxModel());
+        cmbxBillState.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         chkbxSameAsShip.setText("Same as Shipping");
+        chkbxSameAsShip.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         chkbxSameAsShip.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chkbxSameAsShipActionPerformed(evt);
@@ -379,6 +408,9 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                         .addGap(68, 68, 68)))
                 .addContainerGap())
         );
+
+        shippingPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtBillCity, txtBillStreet, txtBillZip});
+
         shippingPanel1Layout.setVerticalGroup(
             shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(shippingPanel1Layout.createSequentialGroup()
@@ -387,26 +419,29 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                 .addGap(18, 18, 18)
                 .addComponent(chkbxSameAsShip)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel19)
-                    .addComponent(txtBillStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtBillStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
                     .addComponent(txtBillCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel21)
-                    .addComponent(cmbxBillState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cmbxBillState, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(txtBillZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(74, 74, 74))
         );
+
+        shippingPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtBillCity, txtBillStreet, txtBillZip});
 
         btnUpdate.setText("Update");
         btnUpdate.setToolTipText("");
+        btnUpdate.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         btnUpdate.setEnabled(false);
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -442,7 +477,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                     .addComponent(shippingPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(orderPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(shippingPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 49, Short.MAX_VALUE)
+                .addGap(18, 58, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
                     .addComponent(btnCancel)
@@ -509,120 +544,66 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
     
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
-        //check if item is selected
-       
-        
-        boolean valid = true;
-        String errorMessage = "";
+
         Customer aCustomer = new Customer();
         Order aOrder = new Order();
         Address shippingAddress = new Address();
         Address billingAddress = new Address();
-        
-        //validate fields
-        
-        //Customer
-        if(!aCustomer.setFirstName(txtShipFirstName.getText())){
-            errorMessage += "Invalid First Name";
-            valid = false;
-        }
-        if(!aCustomer.setLastName(txtShipLastName.getText())){
-            errorMessage += "\nInvalid Last Name";
-            valid = false;
-        }
-        
-         
-        
-        //Shipping
-        if(!shippingAddress.setStreetAddress(txtShipStreet.getText())){
-            errorMessage += "\nInvalid Shipping Steet Address";
-            valid = false;
-        }
-        if(!shippingAddress.setCity(txtShipCity.getText())){
-            errorMessage += "\nInvalid Shipping City";
-            valid = false;
-        }
-        if(!shippingAddress.setState((String) cmbxShipState.getSelectedItem())){
-            errorMessage += "\nInvalid Shipping Sate";
-            valid = false;
-        }
-        if(!shippingAddress.setZipCode(txtShipZip.getText())){
-            errorMessage += "\nInvalid Shipping Zip Code, Must be 5 digits";
-            valid = false;
-        }
-        //billing
-        if(!billingAddress.setStreetAddress(txtBillStreet.getText())){
-            errorMessage += "\nInvalid Billing Steet Address";
-            valid = false;
-        }
-        if(!billingAddress.setCity(txtBillCity.getText())){
-            errorMessage += "\nInvalid Billing City";
-            valid = false;
-        }
-        if(!billingAddress.setState((String) cmbxBillState.getSelectedItem())){
-            errorMessage += "\nInvalid Billing State";
-            valid = false;
-        }
-        if(!billingAddress.setZipCode(txtBillZip.getText())){
-            errorMessage += "\nInvalid Billing Zip Code, Must be 5 digits";
-            valid = false;
-        }
-        
-        
-        //order
-        if((String)cmbxProduct.getSelectedItem() == ""){
-            errorMessage += "\nInvalid Product Selected";
-            valid = false;
-        }else{aOrder.setProduct((String) cmbxProduct.getSelectedItem());}
-        
-        if(rdbtnCredit.isSelected()){
-            aOrder.setPaymentType("Credit");
-        }else{
-            aOrder.setPaymentType("Debit");
-        }
-        
-        if((int)spnrQuantity.getValue() == 0){
-            errorMessage += "\nQuantity Cannot be 0";
-            valid = false;
-        }else{aOrder.setQuantity((int)spnrQuantity.getValue());}
-        
-        if(!aOrder.setAccountNumber(txtAccountNumber.getText())){
-            errorMessage += "\nAccount Number MUST be 7 digits";
-            valid = false;
-        }
-        
-        
-        
-        if(!valid){
-            JOptionPane.showMessageDialog(null, "CORRECT ERROR(s):\n" + errorMessage);
-            System.out.println("fail");
-           
-        }
-        else{
-            //add data
+        //add data
             aCustomer.setBillingAddresss(billingAddress);
             aCustomer.setShippingAddress(shippingAddress);
             aCustomer.setOrders(aOrder);
-            //add customer to local linked list
+        
+        //validate fields
+        if(validateInformation(aCustomer)){  
+            int result = JOptionPane.showConfirmDialog(null,  "Are you sure you want to place this order?",null, JOptionPane.YES_NO_OPTION);
+            if(result == JOptionPane.YES_OPTION) {
+                //add customer to local linked list
             myCustomers.add(aCustomer);
             //add customer to table
             addCustomerTolist(aCustomer);
            
+            //write data to file
+            printCustomers();
+            
             JOptionPane.showMessageDialog(null, "Order Created");
             System.out.println("success");
             
             //clear screen
             clearAll();
+            
+            
+            } 
+           
+            
         }
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+
+    public void printCustomers(){
+        Iterator<Customer> it = myCustomers.iterator();
+        
+       
+            try{
+                PrintWriter pw = new PrintWriter(new FileOutputStream("orders.txt"));
+                while (it.hasNext()){
+                    Customer c = it.next();
+                    pw.write(c.toString() +"\n\n");
+                    
+                }
+                pw.close();
+                System.out.println("File successfully created!");
+            }
+            catch (FileNotFoundException e){
+                System.out.println("The file could not be created in the program folder. \n Please check permissions");
+            }
+        
+     
+        
+    }
     
-   
-
     
-
-
     public void addCustomerTolist(Customer aCustomer){
          
         MyTableModel model = (MyTableModel) jTable1.getModel();
@@ -757,13 +738,13 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
             aOrder.setPaymentType("Debit");
         }
         
-        if((int)spnrQuantity.getValue() == 0){
-            errorMessage += "\nQuantity Cannot be 0";
+        if(!((int)spnrQuantity.getValue() >=1 && (int)spnrQuantity.getValue() <=5)){
+            errorMessage += "\nQuantity Must be within 1 - 5";
             valid = false;
         }else{aOrder.setQuantity((int)spnrQuantity.getValue());}
         
         if(!aOrder.setAccountNumber(txtAccountNumber.getText())){
-            errorMessage += "\nAccount Number MUST be 7 digits";
+            errorMessage += "\nAccount Number must be 7 digits";
             valid = false;
         }
         if(!valid){
@@ -779,12 +760,20 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         if(validateInformation(aCustomer)){
             updateCustomerOnList(aCustomer);
             //reset screen
+            //write data to file
+            printCustomers();
+            
             clearAll();
             btnSubmit.setEnabled(true);
             btnUpdate.setEnabled(false);
          }  
         
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void spnrQuantityStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnrQuantityStateChanged
+        // TODO add your handling code here:
+        txtTotal.setText(Double.toString((int)spnrQuantity.getValue() * 50.00));
+    }//GEN-LAST:event_spnrQuantityStateChanged
 
     /**
      * @param args the command line arguments

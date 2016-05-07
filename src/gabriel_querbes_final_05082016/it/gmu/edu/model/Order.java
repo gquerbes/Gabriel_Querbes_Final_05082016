@@ -37,6 +37,7 @@ public class Order {
     }
 
     public void setQuantity(int quantity) {
+        totalCost = quantity * 50.00;
         this.quantity = quantity;
     }
 
@@ -69,6 +70,11 @@ public class Order {
             return false;
         }
         
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" + "product=" + product + ", quantity=" + quantity + ", totalCost=" + totalCost + ", paymentType=" + paymentType + ", accountNumber=" + accountNumber + '}';
     }
     
     

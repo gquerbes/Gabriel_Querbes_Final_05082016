@@ -1,0 +1,2 @@
+Customer{firstName=gadsfaf, lastName=sdfsd, shippingAddress=Address{streetAddress=sdfsadfs, city=sdfasdf, state=AZ, zipCode=11111}, billingAddresss=Address{streetAddress=sdfsadfs, city=sdfasdf, state=AZ, zipCode=11111}, orders=Order{product=Algebra 101, quantity=1, totalCost=50.0, paymentType=Credit, accountNumber=2232222}}
+
