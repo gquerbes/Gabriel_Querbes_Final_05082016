@@ -1,2 +1,4 @@
-Customer{firstName=gadsfaf, lastName=sdfsd, shippingAddress=Address{streetAddress=sdfsadfs, city=sdfasdf, state=AZ, zipCode=11111}, billingAddresss=Address{streetAddress=sdfsadfs, city=sdfasdf, state=AZ, zipCode=11111}, orders=Order{product=Algebra 101, quantity=1, totalCost=50.0, paymentType=Credit, accountNumber=2232222}}
+Customer{firstName=Gabriel, lastName=Querbes, shippingAddress=Address{streetAddress=fsafa, city=fdsafas, state=AR, zipCode=22231}, billingAddresss=Address{streetAddress=fsafa, city=fdsafas, state=AR, zipCode=22231}, orders=Order{product=English 101, quantity=3, totalCost=150.0, paymentType=Credit, accountNumber=1222231}}
+
+Customer{firstName=Joann, lastName=Romero, shippingAddress=Address{streetAddress=fasdfa, city=dfasf, state=VA, zipCode=33333}, billingAddresss=Address{streetAddress=deckert, city=dfasf, state=VA, zipCode=33333}, orders=Order{product=Algebra 101, quantity=3, totalCost=150.0, paymentType=Credit, accountNumber=3423344}}
 

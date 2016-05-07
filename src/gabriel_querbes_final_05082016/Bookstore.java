@@ -139,6 +139,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
 
         txtShipCity.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        txtShipZip.setToolTipText("5 digits");
         txtShipZip.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         cmbxShipState.setModel(new MyComboBoxModel());
@@ -170,8 +171,8 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                         .addComponent(txtShipCity, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(shippingPanelLayout.createSequentialGroup()
                         .addComponent(jLabel8)
-                        .addGap(12, 12, 12)
-                        .addComponent(cmbxShipState, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbxShipState, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(shippingPanelLayout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -397,11 +398,9 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                             .addComponent(jLabel20)
                             .addComponent(jLabel21))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(shippingPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(cmbxBillState, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(txtBillCity, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtBillCity, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbxBillState, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, shippingPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(chkbxSameAsShip)
@@ -429,8 +428,8 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel21)
-                    .addComponent(cmbxBillState, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(cmbxBillState, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(shippingPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
                     .addComponent(txtBillZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -593,7 +592,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
                     
                 }
                 pw.close();
-                System.out.println("File successfully created!");
+                
             }
             catch (FileNotFoundException e){
                 System.out.println("The file could not be created in the program folder. \n Please check permissions");
@@ -648,7 +647,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         }else{
             rdbtnDebit.setSelected(true);
         }
-        txtTotal.setText(Double.toString( aCustomer.getOrders().getQuantity() * 50.00));
+        txtTotal.setText("$" + Double.toString( aCustomer.getOrders().getQuantity() * 50.00));
         txtAccountNumber.setText(aCustomer.getOrders().getAccountNumber());
         cmbxProduct.setSelectedItem(aCustomer.getOrders().getProduct());
         
@@ -753,16 +752,19 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         }
         return valid;
     }
+    
+    
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
        // TODO add your handling code here:
         Customer aCustomer = currentCustomer;
         
         if(validateInformation(aCustomer)){
             updateCustomerOnList(aCustomer);
-            //reset screen
+            
             //write data to file
             printCustomers();
             
+            //reset screen
             clearAll();
             btnSubmit.setEnabled(true);
             btnUpdate.setEnabled(false);
@@ -772,7 +774,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
 
     private void spnrQuantityStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_spnrQuantityStateChanged
         // TODO add your handling code here:
-        txtTotal.setText(Double.toString((int)spnrQuantity.getValue() * 50.00));
+        txtTotal.setText("$"+Double.toString((int)spnrQuantity.getValue() * 50.00));
     }//GEN-LAST:event_spnrQuantityStateChanged
 
     /**

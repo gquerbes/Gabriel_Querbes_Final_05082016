@@ -11,15 +11,14 @@ import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.event.*;
 import javax.swing.table.AbstractTableModel;
-import java.util.Vector;
+
 import gabriel_querbes_final_05082016.it.gmu.edu.model.Customer;
-import java.util.Iterator;
-import javax.swing.JOptionPane;
+
 
 public class MyTableModel extends AbstractTableModel
         implements TableModelListener {
 private Object[] names = {"First Name", "Last Name", "Billing Address","Item", "Quantity"};
-//private static Vector data = new Vector(10);
+
 
 //customer list
 LinkedList<Customer> myCustomersList = new LinkedList<>();
@@ -31,54 +30,10 @@ String[][] allData = new String[10][5];
 int i = 0;
 
 
-//private static Object[][] data11 = {
-//
-//        
-//       {"John", "Doe", "1234 ABC Street", "VA", "22111", true},
-//        {"Joe", "Doe", "6789 XYZ Street", "VA", "23111", true},
-//        {"Joe", "Doe", "2345 XYZ Street", "VA", "24111", false},
-//        {"Joe", "Doe", "5678 XYZ Street", "VA", "25111", false},
-//        {"Joe", "Doe", "4565 XYZ Street", "VA", "26111", true}
-//    };
 
 
 public MyTableModel() {
-        
-        
-//        //making fake customer 
-//        Customer aCustomer = new Customer();
-//        Address aAddresss = new Address();
-//        Order aOrder = new Order();
-//        aCustomer.setBillingAddresss(aAddresss);
-//        aCustomer.setOrders(aOrder);
-//        
-//        
-//        aCustomer.getBillingAddresss().setStreetAddress("someshie");
-//        aCustomer.getOrders().setProduct("shit");
-//        aCustomer.getOrders().setQuantity(2);
-//        aCustomer.setFirstName("Gabriel");
-//        aCustomer.setLastName("lastname");
-//        
-//        myCustomersList.add(aCustomer);
-//        //END OF FAKE CUSTOmer
-//        
-//        
-//        Iterator<Customer> it = myCustomersList.iterator();
-//        int i = 0;
-//        
-//        while(it.hasNext()){
-//            do{
-//                Customer current = it.next();
-//                allData[i][0] = current.getFirstName();
-//                allData[i][1] = current.getLastName();
-//                allData[i][2] = current.getBillingAddresss().getStreetAddress();
-//                allData[i][3] = current.getOrders().getProduct();
-//                allData[i][4] = Integer.toString(current.getOrders().getQuantity());
-//                i++;
-//            }while(it.hasNext());
-//            
-//        }
-        
+    
 
 }
 
@@ -102,16 +57,10 @@ public Object getValueAt(int r, int c) {
 @Override
 public Class getColumnClass(int c) {
         if (c == 4) return Integer.class;
-        if (c == 5) return Boolean.class;
         return String.class;
 }
 
-@Override
-//public void setValueAt(Object value, int r, int c) {
-//        System.out.println(" Value Changed for Row = " + r + " Col = " + c + " :: " + (String) value);
-//        Customer add = (Customer) data.get(r);
-////        add.setValue(c, value);
-//}
+
 
 public int getColumnCount() { return names.length;}
 
@@ -122,6 +71,8 @@ public boolean isCellEditable(int r, int c) {
 
     return false;
 }
+
+
 @Override
 public void tableChanged(TableModelEvent tme) {
         int row = tme.getFirstRow();
@@ -133,28 +84,7 @@ public void tableChanged(TableModelEvent tme) {
 
     }
 
-/**
-public void actionPerformed(ActionEvent ae) {
-    Address add = (Address) data.get(4);
-    add.setValue(0, "John");
-    add.setValue(1, "Smith");
-    add.setValue(2, "1223 Oak Street");
-    add.setValue(3, "VA");
-    add.setValue(4, "90876");
-    add.setValue(5, true);
 
-    Address add1 = new Address();
-    add1.setValue(0, "Roger");
-    add1.setValue(1, "Waters");
-    add1.setValue(2, "122 Oak Street");
-    add1.setValue(3, "VA");
-    add1.setValue(4, "90876");
-    add1.setValue(5, true);
-    data.add(add1);
-
-    super.fireTableDataChanged();
-}
-**/
 
 public void editData(Customer current,int currentRow) {
     int x = currentRow;
@@ -179,7 +109,7 @@ public void addData(Customer current) {
                 allData[i][2] = current.getBillingAddresss().getStreetAddress();
                 allData[i][3] = current.getOrders().getProduct();
                 allData[i][4] = Integer.toString(current.getOrders().getQuantity());
-        //data.add(current);
+        
         i++;
 
     super.fireTableRowsInserted(myCustomersList.size()-1, myCustomersList.size()-1);
