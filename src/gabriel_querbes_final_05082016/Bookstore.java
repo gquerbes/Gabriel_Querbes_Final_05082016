@@ -680,10 +680,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         currentCustomer = aCustomer;
         currentRow = row;
         
-        //reset screen
-//        clearAll();
-//        btnSubmit.enable(true);
-//        btnUpdate.enable(false);
+
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -781,6 +778,14 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         
         //update table
         updateCustomerOnList(aCustomer);
+        
+        //reset screen
+        clearAll();
+        btnSubmit.setEnabled(true);
+        btnUpdate.setEnabled(false);
+      
+        
+        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
@@ -830,6 +835,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         txtShipStreet.setText("");
         txtShipCity.setText("");
         txtShipZip.setText("");
+        chkbxSameAsShip.setSelected(false);
         cmbxShipState.setSelectedItem("");
         
     }
