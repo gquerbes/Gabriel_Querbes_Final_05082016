@@ -506,6 +506,7 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
     }
 
    
+    
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         //check if item is selected
@@ -690,15 +691,13 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
         btnUpdate.setEnabled(false);
     }//GEN-LAST:event_btnCancelActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-      
-        Customer aCustomer = currentCustomer;
+    
+    public boolean validateInformation(Customer aCustomer){
         Address shippingAddress = aCustomer.getShippingAddress();
         Address billingAddress = aCustomer.getBillingAddresss();
         Order aOrder = aCustomer.getOrders();
         
-        // TODO add your handling code here:
-          boolean valid = true;
+         boolean valid = true;
          String errorMessage = "";
         //validate fields
 
@@ -767,24 +766,23 @@ public class Bookstore extends javax.swing.JFrame implements ActionListener {
             errorMessage += "\nAccount Number MUST be 7 digits";
             valid = false;
         }
-        
-
         if(!valid){
             JOptionPane.showMessageDialog(null, "CORRECT ERROR(s):\n" + errorMessage);
             System.out.println("fail");
-           
         }
+        return valid;
+    }
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+       // TODO add your handling code here:
+        Customer aCustomer = currentCustomer;
         
-        
-        //update table
-        updateCustomerOnList(aCustomer);
-        
-        //reset screen
-        clearAll();
-        btnSubmit.setEnabled(true);
-        btnUpdate.setEnabled(false);
-      
-        
+        if(validateInformation(aCustomer)){
+            updateCustomerOnList(aCustomer);
+            //reset screen
+            clearAll();
+            btnSubmit.setEnabled(true);
+            btnUpdate.setEnabled(false);
+         }  
         
     }//GEN-LAST:event_btnUpdateActionPerformed
 
