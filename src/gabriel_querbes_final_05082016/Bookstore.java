@@ -11,17 +11,25 @@ import gabriel_querbes_final_05082016.it.gmu.edu.model.MyBooksComboBoxModel;
 import gabriel_querbes_final_05082016.it.gmu.edu.model.MyComboBoxModel;
 import gabriel_querbes_final_05082016.it.gmu.edu.model.MyTableModel;
 import gabriel_querbes_final_05082016.it.gmu.edu.model.Order;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 
 /**
  *
  * @author gabrielquerbes
  */
-public class Bookstore extends javax.swing.JFrame {
+public class Bookstore extends javax.swing.JFrame implements ActionListener {
     //data structure
     LinkedList<Customer> myCustomers = new LinkedList <>();
+    Customer currentCustomer;
+    int currentRow;
     
     /**
      * Creates new form Bookstore
@@ -84,6 +92,7 @@ public class Bookstore extends javax.swing.JFrame {
         txtBillZip = new javax.swing.JTextField();
         cmbxBillState = new javax.swing.JComboBox<>();
         chkbxSameAsShip = new javax.swing.JCheckBox();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +101,12 @@ public class Bookstore extends javax.swing.JFrame {
         jSplitPane1.setEnabled(false);
 
         jTable1.setModel(new MyTableModel());
+        jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jSplitPane1.setBottomComponent(jScrollPane1);
@@ -305,6 +320,11 @@ public class Bookstore extends javax.swing.JFrame {
         });
 
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -385,6 +405,15 @@ public class Bookstore extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        btnUpdate.setText("Update");
+        btnUpdate.setToolTipText("");
+        btnUpdate.setEnabled(false);
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -398,6 +427,8 @@ public class Bookstore extends javax.swing.JFrame {
                 .addComponent(shippingPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUpdate)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSubmit)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancel)
@@ -414,7 +445,8 @@ public class Bookstore extends javax.swing.JFrame {
                 .addGap(18, 49, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
-                    .addComponent(btnCancel))
+                    .addComponent(btnCancel)
+                    .addComponent(btnUpdate))
                 .addGap(35, 35, 35))
         );
 
@@ -457,12 +489,28 @@ public class Bookstore extends javax.swing.JFrame {
       
     }//GEN-LAST:event_chkbxSameAsShipActionPerformed
 
-    
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-    
+      private class RowListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent event) {
+            System.out.print("ROW SELECTION EVENT. ");
+            if (event.getValueIsAdjusting()) {
+                return;
+            }
+            
+            
+        }
+    }
+
+   
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
+        //check if item is selected
        
+        
         boolean valid = true;
         String errorMessage = "";
         Customer aCustomer = new Customer();
@@ -526,7 +574,11 @@ public class Bookstore extends javax.swing.JFrame {
             valid = false;
         }else{aOrder.setProduct((String) cmbxProduct.getSelectedItem());}
         
-        
+        if(rdbtnCredit.isSelected()){
+            aOrder.setPaymentType("Credit");
+        }else{
+            aOrder.setPaymentType("Debit");
+        }
         
         if((int)spnrQuantity.getValue() == 0){
             errorMessage += "\nQuantity Cannot be 0";
@@ -550,16 +602,25 @@ public class Bookstore extends javax.swing.JFrame {
             aCustomer.setBillingAddresss(billingAddress);
             aCustomer.setShippingAddress(shippingAddress);
             aCustomer.setOrders(aOrder);
-           //myCustomers.add(aCustomer);
+            //add customer to local linked list
+            myCustomers.add(aCustomer);
+            //add customer to table
             addCustomerTolist(aCustomer);
            
             JOptionPane.showMessageDialog(null, "Order Created");
             System.out.println("success");
+            
+            //clear screen
+            clearAll();
         }
 
-        
-        
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    
+   
+
+    
+
 
     public void addCustomerTolist(Customer aCustomer){
          
@@ -568,15 +629,165 @@ public class Bookstore extends javax.swing.JFrame {
       
     }
     
+    public void updateCustomerOnList(Customer aCustomer){
+        MyTableModel model = (MyTableModel) jTable1.getModel();
+        model.editData(aCustomer,currentRow);
+        
+    }
+    
     private void txtAccountNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAccountNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAccountNumberActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        MyTableModel model = (MyTableModel) jTable1.getModel();
+        int row = jTable1.rowAtPoint(evt.getPoint());
+        Customer aCustomer = myCustomers.get(row);
+        // populate table with data
+        //shipping
+        txtShipFirstName.setText(aCustomer.getFirstName());
+        txtShipLastName.setText(aCustomer.getLastName());
+        txtShipStreet.setText(aCustomer.getShippingAddress().getStreetAddress());
+        txtShipCity.setText(aCustomer.getShippingAddress().getCity());
+        txtShipZip.setText(aCustomer.getShippingAddress().getZipCode());
+        cmbxShipState.setSelectedItem(aCustomer.getShippingAddress().getState());
+        
+        //billing
+        txtBillStreet.setText(aCustomer.getBillingAddresss().getStreetAddress());
+        txtBillCity.setText(aCustomer.getBillingAddresss().getCity());
+        txtBillZip.setText(aCustomer.getBillingAddresss().getZipCode());
+        cmbxBillState.setSelectedItem(aCustomer.getBillingAddresss().getState());
+        
+        //order
+        spnrQuantity.setValue(aCustomer.getOrders().getQuantity());
+        if(aCustomer.getOrders().getPaymentType().equals("Credit")){
+            rdbtnCredit.setSelected(true);
+        }else{
+            rdbtnDebit.setSelected(true);
+        }
+        txtTotal.setText(Double.toString( aCustomer.getOrders().getQuantity() * 50.00));
+        txtAccountNumber.setText(aCustomer.getOrders().getAccountNumber());
+        cmbxProduct.setSelectedItem(aCustomer.getOrders().getProduct());
+        
+        //hide the submit button
+        btnSubmit.setEnabled(false);
+        //show update button
+        btnUpdate.setEnabled(true);
+        
+        
+        //set current customer for edit
+        currentCustomer = aCustomer;
+        currentRow = row;
+        
+        //reset screen
+//        clearAll();
+//        btnSubmit.enable(true);
+//        btnUpdate.enable(false);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        clearAll();
+        btnSubmit.setEnabled(true);
+        btnUpdate.setEnabled(false);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+      
+        Customer aCustomer = currentCustomer;
+        Address shippingAddress = aCustomer.getShippingAddress();
+        Address billingAddress = aCustomer.getBillingAddresss();
+        Order aOrder = aCustomer.getOrders();
+        
+        // TODO add your handling code here:
+          boolean valid = true;
+         String errorMessage = "";
+        //validate fields
+
+        if(!aCustomer.setFirstName(txtShipFirstName.getText())){
+            errorMessage += "Invalid First Name";
+            valid = false;
+        }
+        if(!aCustomer.setLastName(txtShipLastName.getText())){
+            errorMessage += "\nInvalid Last Name";
+            valid = false;
+        }
+        
+        //Shipping
+        if(!shippingAddress.setStreetAddress(txtShipStreet.getText())){
+            errorMessage += "\nInvalid Shipping Steet Address";
+            valid = false;
+        }
+        if(!shippingAddress.setCity(txtShipCity.getText())){
+            errorMessage += "\nInvalid Shipping City";
+            valid = false;
+        }
+        if(!shippingAddress.setState((String) cmbxShipState.getSelectedItem())){
+            errorMessage += "\nInvalid Shipping Sate";
+            valid = false;
+        }
+        if(!shippingAddress.setZipCode(txtShipZip.getText())){
+            errorMessage += "\nInvalid Shipping Zip Code, Must be 5 digits";
+            valid = false;
+        }
+        //billing
+        if(!billingAddress.setStreetAddress(txtBillStreet.getText())){
+            errorMessage += "\nInvalid Billing Steet Address";
+            valid = false;
+        }
+        if(!billingAddress.setCity(txtBillCity.getText())){
+            errorMessage += "\nInvalid Billing City";
+            valid = false;
+        }
+        if(!billingAddress.setState((String) cmbxBillState.getSelectedItem())){
+            errorMessage += "\nInvalid Billing State";
+            valid = false;
+        }
+        if(!billingAddress.setZipCode(txtBillZip.getText())){
+            errorMessage += "\nInvalid Billing Zip Code, Must be 5 digits";
+            valid = false;
+        }
+        
+        //order
+        if((String)cmbxProduct.getSelectedItem() == ""){
+            errorMessage += "\nInvalid Product Selected";
+            valid = false;
+        }else{aOrder.setProduct((String) cmbxProduct.getSelectedItem());}
+        
+        if(rdbtnCredit.isSelected()){
+            aOrder.setPaymentType("Credit");
+        }else{
+            aOrder.setPaymentType("Debit");
+        }
+        
+        if((int)spnrQuantity.getValue() == 0){
+            errorMessage += "\nQuantity Cannot be 0";
+            valid = false;
+        }else{aOrder.setQuantity((int)spnrQuantity.getValue());}
+        
+        if(!aOrder.setAccountNumber(txtAccountNumber.getText())){
+            errorMessage += "\nAccount Number MUST be 7 digits";
+            valid = false;
+        }
+        
+
+        if(!valid){
+            JOptionPane.showMessageDialog(null, "CORRECT ERROR(s):\n" + errorMessage);
+            System.out.println("fail");
+           
+        }
+        
+        
+        //update table
+        updateCustomerOnList(aCustomer);
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /* Set the Nimbus look andfeel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -608,12 +819,18 @@ public class Bookstore extends javax.swing.JFrame {
         
     }
 
+    public void clearAll(){
+        clearShipping();
+        clearBilling();
+        clearOrder();
+    }
     public void clearShipping(){
         txtShipFirstName.setText("");
         txtShipLastName.setText("");
         txtShipStreet.setText("");
         txtShipCity.setText("");
         txtShipZip.setText("");
+        cmbxShipState.setSelectedItem("");
         
     }
     
@@ -621,6 +838,8 @@ public class Bookstore extends javax.swing.JFrame {
         txtBillStreet.setText("");
         txtBillCity.setText("");
         txtBillZip.setText("");
+        cmbxBillState.setSelectedItem("");
+        
     }
     
     public void clearOrder(){
@@ -628,6 +847,8 @@ public class Bookstore extends javax.swing.JFrame {
         rdbtnCredit.setSelected(false);
         rdbtnDebit.setSelected(false);
         txtTotal.setText("");
+        txtAccountNumber.setText("");
+        cmbxProduct.setSelectedItem("");
         
     }
     
@@ -636,6 +857,7 @@ public class Bookstore extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JCheckBox chkbxSameAsShip;
     private javax.swing.JComboBox<String> cmbxBillState;

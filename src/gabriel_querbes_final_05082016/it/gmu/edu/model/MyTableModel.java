@@ -82,12 +82,12 @@ public MyTableModel() {
 
 }
 
-//public Address getValueAtRow(int r) {
-//    if (r <= data.size()) {
-//        return (Address) data.get(r);
-//    }
-//    return null;
-//}
+public Customer getValueAtRow(int r) {
+    if (r <= myCustomersList.size()) {
+        return (Customer) myCustomersList.get(r);
+    }
+    return null;
+}
 
 @Override
 public String getColumnName(int i) {
@@ -156,13 +156,23 @@ public void actionPerformed(ActionEvent ae) {
 }
 **/
 
-//public void editData(ActionEvent ae) {
+public void editData(Customer current,int currentRow) {
+    int x = currentRow;
+    allData[x][0] = current.getFirstName();
+    allData[x][1] = current.getLastName();
+    allData[x][2] = current.getBillingAddresss().getStreetAddress();
+    allData[x][3] = current.getOrders().getProduct();
+    allData[x][4] = Integer.toString(current.getOrders().getQuantity());
+    
+    super.fireTableRowsUpdated(x-1, x-1);
+    
+                  
 //        long number = Math.round(Math.random()*10);
 //        
-//        if (number >= data.size()) {number = data.size() - 1;}
+//        if (number >= myCustomersList.size()) {number = myCustomersList.size() - 1;}
 //        System.out.println("Row = " + number);
 //        
-//        Address add = (Address) data.get((int)number);
+//        Customer add = (Address) data.get((int)number);
 ////        add.setValue(0, "John");
 ////        add.setValue(1, "Smith");
 ////        add.setValue(2, "1223 Oak Street");
@@ -171,8 +181,8 @@ public void actionPerformed(ActionEvent ae) {
 ////        add.setValue(5, true);
 //
 //        super.fireTableRowsUpdated((int)number, (int)number);
-//        
-//  }
+        
+  }
 
 public void addData(Customer current) {
         
